@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Otika - Admin Dashboard Template</title>
+  <title>Online Inventory AND Fish Feeding Monitoring</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?=base_url();?>design/assets/css/app.min.css">
   <link rel="stylesheet" href="<?=base_url();?>design/assets/bundles/bootstrap-social/bootstrap-social.css">
@@ -30,9 +30,9 @@
                 <h4>Login</h4>
               </div>
               <div class="card-body">
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <?=form_open(base_url()."authenticate",array('class' => 'needs-validation', 'novalidate' => ''));?>                
                   <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Username</label>
                     <input id="email" type="text" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
                       Please fill in your email
@@ -75,7 +75,14 @@
                       Login
                     </button>
                   </div>
-                </form>                
+                  <?php
+                    if($this->session->error){
+                  ?>
+                  <div class="alert alert-danger"><?=$this->session->error;?></div>
+                  <?php
+                    }
+                  ?>
+                <?=form_close();?>               
               </div>
             </div>            
           </div>
