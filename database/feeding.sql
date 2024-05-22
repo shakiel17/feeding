@@ -108,6 +108,20 @@ CREATE TABLE `stocks` (
 
 /*Data for the table `stocks` */
 
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` int(45) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `fullname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user` */
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
