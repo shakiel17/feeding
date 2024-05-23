@@ -57,6 +57,77 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('templates/modal');
             $this->load->view('templates/footer');
         }
+        public function manage_user(){
+            $page = "manage_user";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['users'] = $this->Feeding_model->getAllUsers();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function save_user(){
+            $save=$this->Feeding_model->save_user();
+            if($save){
+                $this->session->set_flashdata('success','User details successfully saved!');
+            }else{
+                $this->session->set_flashdata('error','Unable to save user details!');
+            }
+            redirect(base_url()."manage_user");
+        }
+        public function delete_user($id){
+            $save=$this->Feeding_model->delete_user($id);
+            if($save){
+                $this->session->set_flashdata('success','User details successfully deleted!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to delete user details!');
+            }
+            redirect(base_url()."manage_user");
+        }
+
+        public function manage_fish(){
+            $page = "manage_fish";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['items'] = $this->Feeding_model->getAllFish();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function save_fish(){
+            $save=$this->Feeding_model->save_fish();
+            if($save){
+                $this->session->set_flashdata('success','Fish details successfully saved!');
+            }else{
+                $this->session->set_flashdata('error','Unable to save Fish details!');
+            }
+            redirect(base_url()."manage_fish");
+        }
+        public function delete_fish($id){
+            $save=$this->Feeding_model->delete_fish($id);
+            if($save){
+                $this->session->set_flashdata('success','Fish details successfully deleted!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to delete fish details!');
+            }
+            redirect(base_url()."manage_fish");
+        }
         
 }
 ?>

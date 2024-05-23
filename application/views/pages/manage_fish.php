@@ -1,96 +1,71 @@
 <div class="main-content">
         <section class="section">
-          <div class="row ">
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Fish</h5>
-                          <h2 class="mb-3 font-18">258</h2>
-                          <p class="mb-0"><span class="col-green">10%</span> Increase</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/1.png" alt="">
-                        </div>
-                      </div>
+          <div class="section-body">            
+            <div class="row">
+              <div class="col-6">
+                <?php
+                if($this->session->success){
+                    ?>
+                    <div class="alert alert-success"><?=$this->session->success;?></div>
+                    <?php
+                }
+                ?>              
+                <?php
+                if($this->session->failed){
+                    ?>
+                    <div class="alert alert-danger"><?=$this->session->failed;?></div>
+                    <?php
+                }
+                ?>              
+                <div class="card">
+                  <div class="card-header">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td><h4>List of Fish</h4></td>
+                            <td align="right"><a href="#" class="btn btn-primary addFish" data-toggle="modal" data-target="#ManageFish"><i class="fas fa-plus"></i> New Fish</a></td>
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" id="table-1">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Feeds Usage</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $x=1;
+                            foreach($items as $user){
+                                echo "<tr>";
+                                    echo "<td>$x.</td>";
+                                    echo "<td>$user[description]</td>";
+                                    echo "<td>$user[category]</td>";
+                                    echo "<td align='center'>$user[feed_usage]</td>";
+                                    ?>
+                                    <td align="center">
+                                        <a href="#" class="btn btn-warning btn-sm editFish" data-toggle="modal" data-target="#ManageFish" data-id="<?=$user['id'];?>_<?=$user['description'];?>_<?=$user['category'];?>_<?=$user['feed_usage'];?>"><i class="fas fa-edit"></i></a>
+                                        <a href="<?=base_url();?>delete_fish/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this fish?'); return false;"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                    <?php
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Feeds</h5>
-                          <h2 class="mb-3 font-18">1,287</h2>
-                          <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/2.png" alt="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Users</h5>
-                          <h2 class="mb-3 font-18">128</h2>
-                          <p class="mb-0"><span class="col-green">18%</span>
-                            Increase</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/3.png" alt="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Revenue</h5>
-                          <h2 class="mb-3 font-18">$48,697</h2>
-                          <p class="mb-0"><span class="col-green">42%</span> Increase</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/4.png" alt="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>          
+            </div>                      
+          </div>
         </section>
         <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>

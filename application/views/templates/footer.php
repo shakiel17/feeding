@@ -10,6 +10,41 @@
   <script src="<?=base_url();?>design/assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="<?=base_url();?>design/assets/js/custom.js"></script>
+  <script src="<?=base_url();?>design/assets/bundles/datatables/datatables.min.js"></script>
+  <script src="<?=base_url();?>design/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?=base_url();?>design/assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="<?=base_url();?>design/assets/js/page/datatables.js"></script>
+  <script>
+    $('.addUser').click(function(){
+      document.getElementById('user_id').value = '';
+      document.getElementById('user_name').value = '';
+      document.getElementById('user_password').value = '';
+      document.getElementById('user_fullname').value = '';      
+    });
+    $('.editUser').click(function(){
+      var data = $(this).data('id');
+      var id = data.split('_');
+      document.getElementById('user_id').value = id[0];
+      document.getElementById('user_name').value = id[1];
+      document.getElementById('user_password').value = id[2];
+      document.getElementById('user_fullname').value = id[3];      
+    });
+    $('.addFish').click(function(){
+      document.getElementById('fish_id').value = '';
+      document.getElementById('fish_description').value = '';
+      document.getElementById('fish_category').value = '';
+      document.getElementById('fish_feed_usage').value = '';      
+    });
+    $('.editFish').click(function(){
+      var data = $(this).data('id');
+      var id = data.split('_');
+      document.getElementById('fish_id').value = id[0];
+      document.getElementById('fish_description').value = id[1];
+      document.getElementById('fish_category').value = id[2];
+      document.getElementById('fish_feed_usage').value = id[3];      
+    });
+  </script>
 </body>
 
 

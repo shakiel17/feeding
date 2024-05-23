@@ -19,5 +19,74 @@
                 return false;
             }
         }
+        public function getAllUsers(){
+            $result=$this->db->query("SELECT * FROM user ORDER BY fullname ASC");
+            return $result->result_array();
+        }
+        public function save_user(){
+            $id=$this->input->post('id');
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $fullname=$this->input->post('fullname');
+            $check=$this->db->query("SELECT * FROM user WHERE username = '$username' AND id <> '$id'");
+            if($check->num_rows()>0){
+                return false;
+            }else{
+                if($id==""){
+                    $result=$this->db->query("INSERT INTO user(username,`password`,fullname) VALUES('$username', '$password', '$fullname')");
+                }else{
+                    $result=$this->db->query("UPDATE user SET `password` = '$password',username='$username',fullname='$fullname' WHERE id='$id'");
+                }
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function delete_user($id){
+            $result=$this->db->query("DELETE FROM user WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function getAllFish(){
+            $result=$this->db->query("SELECT * FROM fish ORDER BY `description` ASC");
+            return $result->result_array();
+        }
+        public function save_fish(){
+            $id=$this->input->post('id');
+            $description=$this->input->post('description');
+            $category=$this->input->post('category');
+            $feed_usage=$this->input->post('feed_usage');
+            $datearray=date('Y-m-d');            
+            $timearray=date('H:i:s');
+            $check=$this->db->query("SELECT * FROM fish WHERE `description` = '$description' AND category='$category' AND id <> '$id'");
+            if($check->num_rows()>0){
+                return false;
+            }else{
+                if($id==""){
+                    $result=$this->db->query("INSERT INTO fish(`description`,category,feed_usage,datearray,timearray) VALUES('$description', '$category', '$feed_usage','$datearray','$timearray')");
+                }else{
+                    $result=$this->db->query("UPDATE fish SET `description` = '$description',category='$category',feed_usage='$feed_usage' WHERE id='$id'");
+                }
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function delete_fish($id){
+            $result=$this->db->query("DELETE FROM fish WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>
