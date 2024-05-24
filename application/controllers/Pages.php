@@ -128,6 +128,42 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url()."manage_fish");
         }
+
+        public function manage_feeds(){
+            $page = "manage_feeds";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['items'] = $this->Feeding_model->getAllFeeds();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function save_feeds(){
+            $save=$this->Feeding_model->save_feeds();
+            if($save){
+                $this->session->set_flashdata('success','Feeds details successfully saved!');
+            }else{
+                $this->session->set_flashdata('error','Unable to save Feeds details!');
+            }
+            redirect(base_url()."manage_feeds");
+        }
+        public function delete_feeds($id){
+            $save=$this->Feeding_model->delete_feeds($id);
+            if($save){
+                $this->session->set_flashdata('success','Feeds details successfully deleted!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to delete feeds details!');
+            }
+            redirect(base_url()."manage_feeds");
+        }
         
 }
 ?>

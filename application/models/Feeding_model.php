@@ -88,5 +88,41 @@
                 return false;
             }
         }
+
+        public function getAllFeeds(){
+            $result=$this->db->query("SELECT * FROM stocks ORDER BY `description` ASC");
+            return $result->result_array();
+        }
+        public function save_feeds(){
+            $id=$this->input->post('id');
+            $description=$this->input->post('description');
+            $category=$this->input->post('quantity');
+            $feed_usage=$this->input->post('stockalert');
+            $datearray=date('Y-m-d');            
+            $timearray=date('H:i:s');
+            $check=$this->db->query("SELECT * FROM stocks WHERE `description` = '$description' AND id <> '$id'");
+            if($check->num_rows()>0){
+                return false;
+            }else{
+                if($id==""){
+                    $result=$this->db->query("INSERT INTO stocks(`description`,quantity,stockalert,datearray,timearray) VALUES('$description', '$category', '$feed_usage','$datearray','$timearray')");
+                }else{
+                    $result=$this->db->query("UPDATE stocks SET `description` = '$description',stockalert='$feed_usage' WHERE id='$id'");
+                }
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function delete_feeds($id){
+            $result=$this->db->query("DELETE FROM stocks WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

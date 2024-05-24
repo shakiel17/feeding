@@ -44,6 +44,23 @@
       document.getElementById('fish_category').value = id[2];
       document.getElementById('fish_feed_usage').value = id[3];      
     });
+
+    $('.addFeeds').click(function(){
+      document.getElementById('feeds_id').value = '';
+      document.getElementById('feeds_description').value = '';
+      document.getElementById('feeds_quantity').value = '';
+      document.getElementById('feeds_alert').value = '';      
+      document.getElementById('feeds_quantity').disabled = false;
+    });
+    $('.editFeeds').click(function(){
+      var data = $(this).data('id');
+      var id = data.split('_');
+      document.getElementById('feeds_id').value = id[0];
+      document.getElementById('feeds_description').value = id[1];
+      document.getElementById('feeds_quantity').value = id[2];
+      document.getElementById('feeds_alert').value = id[3];      
+      document.getElementById('feeds_quantity').disabled = true;
+    });
   </script>
 </body>
 

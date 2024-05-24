@@ -90,3 +90,38 @@
             <?=form_close();?>
           </div>
         </div>
+
+        <div class="modal fade" id="ManageFeeds" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <?=form_open(base_url()."save_feeds");?>
+            <input type="hidden" name="id" id="feeds_id">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Manage Feeds Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" id="feeds_description" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Qauntity (in grams)</label>
+                    <input type="text" class="form-control" name="quantity" required id="feeds_quantity">
+                  </div>
+                  <div class="form-group">
+                    <label>Critical Level (in grams)</label>
+                    <input type="text" class="form-control" name="stockalert" required id="feeds_alert">
+                  </div>
+              </div>
+              <div class="modal-footer bg-whitesmoke br">
+                <button type="submit" class="btn btn-primary">Submit</button>                
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+            <?=form_close();?>
+          </div>
+        </div>
