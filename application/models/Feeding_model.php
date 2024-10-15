@@ -98,6 +98,7 @@
             $description=$this->input->post('description');
             $category=$this->input->post('quantity');
             $feed_usage=$this->input->post('stockalert');
+            $code=date('YmdHis');
             $datearray=date('Y-m-d');            
             $timearray=date('H:i:s');
             $check=$this->db->query("SELECT * FROM stocks WHERE `description` = '$description' AND id <> '$id'");
@@ -105,7 +106,8 @@
                 return false;
             }else{
                 if($id==""){
-                    $result=$this->db->query("INSERT INTO stocks(`description`,quantity,stockalert,datearray,timearray) VALUES('$description', '$category', '$feed_usage','$datearray','$timearray')");
+                    $result=$this->db->query("INSERT INTO stocks(`code`,`description`,stockalert,datearray,timearray) VALUES('$code','$description','$feed_usage','$datearray','$timearray')");
+                    $result=$this->db->query("INSERT INTO stocktable(stock_id,quantity,trantype,datearray,timearray) VALUES('$code','$category','in','$datearray','$timearray')");
                 }else{
                     $result=$this->db->query("UPDATE stocks SET `description` = '$description',stockalert='$feed_usage' WHERE id='$id'");
                 }
@@ -123,6 +125,10 @@
             }else{
                 return false;
             }
+        }
+        public function getQty($code){
+            $result=$this->db->query("SELECT SUM(quantity) as quantity FROM stocktable WHERE stock_id='$code' GROUP BY stock_id");
+            return $result->row_array();
         }
     }
 ?>

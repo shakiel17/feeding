@@ -20,7 +20,7 @@
             <li class="dropdown">
               <a href="<?=base_url();?>manage_feeds" class="nav-link"><i
                   class="fab fa-bitbucket"></i><span>Feeds</span></a>
-            </li>
+            </li>           
             <?php
             }
             ?>
@@ -31,6 +31,13 @@
             <?php
             if($this->session->admin_login){
             ?>
+            <li class="dropdown"><a href="#" class="menu-toggle nav-link has-dropdown">
+              <i class="fas fa-cog"></i><span>Purchases</span></a>
+              <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="<?=base_url();?>purchase_order">Purchase Order</a></li>                  
+                  <li><a class="nav-link" href="<?=base_url();?>purchase_receiving">Purchase Receiving</a></li>                  
+              </ul>
+            </li> 
             <li class="dropdown"><a href="#" class="menu-toggle nav-link has-dropdown">
               <i class="fas fa-cogs"></i><span>Settings</span></a>
               <ul class="dropdown-menu">

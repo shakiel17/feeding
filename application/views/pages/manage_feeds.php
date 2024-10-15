@@ -44,14 +44,15 @@
                             <?php
                             $x=1;
                             foreach($items as $user){
+                              $qty=$this->Feeding_model->getQty($user['code']);
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
                                     echo "<td>$user[description]</td>";
-                                    echo "<td>$user[quantity]</td>";
+                                    echo "<td>$qty[quantity]</td>";
                                     echo "<td align='center'>$user[stockalert]</td>";
                                     ?>
                                     <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editFeeds" data-toggle="modal" data-target="#ManageFeeds" data-id="<?=$user['id'];?>_<?=$user['description'];?>_<?=$user['quantity'];?>_<?=$user['stockalert'];?>"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-warning btn-sm editFeeds" data-toggle="modal" data-target="#ManageFeeds" data-id="<?=$user['id'];?>_<?=$user['description'];?>_<?=$qty['quantity'];?>_<?=$user['stockalert'];?>"><i class="fas fa-edit"></i></a>
                                         <a href="<?=base_url();?>delete_feeds/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this feeds?'); return false;"><i class="fas fa-trash"></i></a>
                                     </td>
                                     <?php
