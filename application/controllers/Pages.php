@@ -164,6 +164,24 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url()."manage_feeds");
         }
+
+        public function purchase_order(){
+            $page = "purchase_order";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['items'] = $this->Feeding_model->getAllPO();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
         
 }
 ?>

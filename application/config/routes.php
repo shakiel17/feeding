@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['purchase_order'] = 'pages/purchase_order';
 $route['delete_feeds/(:any)'] = 'pages/delete_feeds/$1';
 $route['save_feeds'] = 'pages/save_feeds';
 $route['manage_feeds'] = 'pages/manage_feeds';
