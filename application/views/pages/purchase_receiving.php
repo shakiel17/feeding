@@ -1,9 +1,9 @@
-    <div class="main-content">
+<div class="main-content">
         <section class="section">
           <div class="section-body">            
-            <div class="row">
-              <div class="col-6">
-                <?php
+            <div class="row">            
+              <div class="col-12">                              
+              <?php
                 if($this->session->success){
                     ?>
                     <div class="alert alert-success"><?=$this->session->success;?></div>
@@ -16,13 +16,19 @@
                     <div class="alert alert-danger"><?=$this->session->failed;?></div>
                     <?php
                 }
-                ?>              
+                ?>
+                <?=form_open(base_url()."post_receiving",array("onsubmit" => "return confirm('Do you wish to post receiving?');return false;"));?>
+                <input type="hidden" name="pono" value="<?=$pono;?>">
                 <div class="card">
                   <div class="card-header">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><h4>List of Caretakers</h4></td>
-                            <td align="right"><a href="#" class="btn btn-primary addUser" data-toggle="modal" data-target="#ManageUser"><i class="fas fa-plus"></i> New User</a></td>
+                            <td><h4>PO # (<?=$pono;?>)</h4></td>
+                            <td align="right"><input type="submit" name="post" value="Post Receiving" class="btn btn-success"></td>
+                        </tr>
+                        <tr>
+                            <td width="20%"><h4>Invoice # <input type="text" name="invno" class="form-control" required placeholder="Enter Invoice # here..."></h4></td>
+                            <td align="right">&nbsp;</td>
                         </tr>
                     </table>
                   </div>
@@ -33,31 +39,23 @@
                           <tr>
                             <th class="text-center">
                               #
-                            </th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Contact No.</th>
-                            <th>Action</th>
+                            </th>                            
+                            <th>Description</th>
+                            <th>Qty</td>
+                            <th width="20%">Expiration</th>                            
                           </tr>
                         </thead>
                         <tbody>
                             <?php
                             $x=1;
-                            foreach($users as $user){
+                            foreach($items as $user){                                 
                                 echo "<tr>";
-                                    echo "<td>$x.</td>";
-                                    echo "<td>$user[fullname]</td>";
-                                    echo "<td>$user[username]</td>";
-                                    echo "<td align='center'>$user[password]</td>";
-                                    echo "<td>$user[contactno]</td>";
-                                    ?>
-                                    <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editUser" data-toggle="modal" data-target="#ManageUser" data-id="<?=$user['id'];?>_<?=$user['username'];?>_<?=$user['password'];?>_<?=$user['fullname'];?>_<?=$user['contactno'];?>"><i class="fas fa-edit"></i></a>
-                                        <a href="<?=base_url();?>delete_user/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this user?'); return false;"><i class="fas fa-trash"></i></a>
-                                    </td>
-                                    <?php
+                                    echo "<td><input type='checkbox' name='code[]' value='$user[stock_id]' checked></td>";
+                                    echo "<td>$user[description]</td>";
+                                    echo "<td>$user[quantity]</td>";                                    
+                                    echo "<td><input type='date' name='expiration[]' class='form-control' required></td>";                                    
                                 echo "</tr>";
+                                $x++;
                             }
                             ?>
                         </tbody>
@@ -66,7 +64,8 @@
                   </div>
                 </div>
               </div>
-            </div>                      
+            </div>    
+            <?=form_close();?>                  
           </div>
         </section>
         <div class="settingSidebar">

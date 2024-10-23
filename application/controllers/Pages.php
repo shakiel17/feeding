@@ -174,7 +174,8 @@ date_default_timezone_set('Asia/Manila');
             }else{
                 redirect(base_url());
             }
-            $data['items'] = $this->Feeding_model->getAllPO();
+            $this->session->unset_userdata('pono');
+            $data['items'] = $this->Feeding_model->getAllPO('pending');
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -182,6 +183,119 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('templates/modal');
             $this->load->view('templates/footer');
         }
-        
+        public function purchase_order_new(){
+            $po=date('YmdHis');
+            $this->session->set_userdata('pono',$po);
+            redirect(base_url()."manage_purchase_order");
+        }
+
+        public function purchase_order_manage($po){            
+            $this->session->set_userdata('pono',$po);
+            redirect(base_url()."manage_purchase_order");
+        }
+        public function manage_purchase_order(){
+            $page = "manage_purchase_order";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }            
+            $pono=$this->session->pono;
+            $data['items'] = $this->Feeding_model->getAllPOByNo($pono,'pending');
+            $data['feeds'] = $this->Feeding_model->getAllFeeds();
+            $data['pono'] = $pono;
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function add_to_cart(){
+            $code=$this->input->post('code');
+            $quantity=$this->input->post('quantity');
+            $pono=$this->input->post('pono');
+            foreach($code as $id){
+                $save=$this->Feeding_model->add_to_cart($id,$pono,$quantity);
+            }
+            if($save){
+                $this->session->set_flashdata('success','Item(s) successfully added!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to add items!');
+            }
+            redirect(base_url()."manage_purchase_order");
+        }
+        public function remove_po_item($id){
+            $remove=$this->Feeding_model->remove_po_item($id);
+            if($remove){
+                $this->session->set_flashdata('success','Item successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove item!');
+            }
+            redirect(base_url()."manage_purchase_order");
+        }
+        public function purchase_receiving($pono){
+            $page = "purchase_receiving";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }                        
+            $data['items'] = $this->Feeding_model->getAllPOByNo($pono,'pending');            
+            $data['pono'] = $pono;
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function post_receiving(){
+            $code=$this->input->post('code');
+            $invno=$this->input->post('invno');
+            $expiration=$this->input->post('expiration');
+            $pono=$this->input->post('pono');
+            $x=0;
+            foreach($code as $id){
+                $save=$this->Feeding_model->post_receiving($id,$pono,$invno,$expiration[$x]);
+                $x++;
+            }
+            if($save){
+                $this->session->set_flashdata('success','Post receiving successful!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to post receiving!');
+            }
+            redirect(base_url()."purchase_order");
+        }
+        public function manage_feeding(){
+            $page = "manage_feeding";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['items'] = $this->Feeding_model->getAllFish();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function submit_feeding(){
+            $feeding=$this->Feeding_model->submit_feeding();
+            if($feeding){
+                $this->session->set_flashdata('success','Execute feeding successfully!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to execute feeding!');
+            }
+            redirect(base_url()."manage_feeding");
+        }
 }
 ?>

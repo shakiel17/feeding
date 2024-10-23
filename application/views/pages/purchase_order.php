@@ -1,8 +1,8 @@
-    <div class="main-content">
+<div class="main-content">
         <section class="section">
           <div class="section-body">            
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <?php
                 if($this->session->success){
                     ?>
@@ -21,8 +21,8 @@
                   <div class="card-header">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><h4>List of Caretakers</h4></td>
-                            <td align="right"><a href="#" class="btn btn-primary addUser" data-toggle="modal" data-target="#ManageUser"><i class="fas fa-plus"></i> New User</a></td>
+                            <td><h4>Pending Purchase Order</h4></td>
+                            <td align="right"><a href="<?=base_url();?>purchase_order_new" class="btn btn-primary"><i class="fas fa-plus"></i> New PO</a></td>
                         </tr>
                     </table>
                   </div>
@@ -34,27 +34,25 @@
                             <th class="text-center">
                               #
                             </th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Contact No.</th>
+                            <th>PO #</th>
+                            <th>Date</th>
+                            <th>No. of Items</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             <?php
                             $x=1;
-                            foreach($users as $user){
+                            foreach($items as $user){                              
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
-                                    echo "<td>$user[fullname]</td>";
-                                    echo "<td>$user[username]</td>";
-                                    echo "<td align='center'>$user[password]</td>";
-                                    echo "<td>$user[contactno]</td>";
+                                    echo "<td>$user[pono]</td>";
+                                    echo "<td>$user[datearray]</td>";
+                                    echo "<td>$user[no_of_items]</td>";
                                     ?>
                                     <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editUser" data-toggle="modal" data-target="#ManageUser" data-id="<?=$user['id'];?>_<?=$user['username'];?>_<?=$user['password'];?>_<?=$user['fullname'];?>_<?=$user['contactno'];?>"><i class="fas fa-edit"></i></a>
-                                        <a href="<?=base_url();?>delete_user/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this user?'); return false;"><i class="fas fa-trash"></i></a>
+                                        <a href="<?=base_url();?>purchase_order_manage/<?=$user['pono'];?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Manage</a>                                        
+                                        <a href="<?=base_url();?>purchase_receiving/<?=$user['pono'];?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Receiving</a>
                                     </td>
                                     <?php
                                 echo "</tr>";

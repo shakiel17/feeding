@@ -34,8 +34,7 @@
             <li class="dropdown"><a href="#" class="menu-toggle nav-link has-dropdown">
               <i class="fas fa-cog"></i><span>Purchases</span></a>
               <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="<?=base_url();?>purchase_order">Purchase Order</a></li>                  
-                  <li><a class="nav-link" href="<?=base_url();?>purchase_receiving">Purchase Receiving</a></li>                  
+                  <li><a class="nav-link" href="<?=base_url();?>purchase_order">PO/PR</a></li>                                                      
               </ul>
             </li> 
             <li class="dropdown"><a href="#" class="menu-toggle nav-link has-dropdown">

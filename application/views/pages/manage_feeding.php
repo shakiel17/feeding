@@ -1,8 +1,8 @@
-    <div class="main-content">
+<div class="main-content">
         <section class="section">
           <div class="section-body">            
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <?php
                 if($this->session->success){
                     ?>
@@ -21,8 +21,8 @@
                   <div class="card-header">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><h4>List of Caretakers</h4></td>
-                            <td align="right"><a href="#" class="btn btn-primary addUser" data-toggle="modal" data-target="#ManageUser"><i class="fas fa-plus"></i> New User</a></td>
+                            <td><h4>Fish Feeding</h4></td>
+                            <td align="right"></td>
                         </tr>
                     </table>
                   </div>
@@ -34,28 +34,63 @@
                             <th class="text-center">
                               #
                             </th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Contact No.</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Feeds Usage (in grams)</th>
+                            <th>No. of feeding (today)</th>
+                            <th>Feeds</th>
+                            <th width="15%">Feeds (in grams)</th>
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                        
                             <?php
                             $x=1;
-                            foreach($users as $user){
+                            foreach($items as $user){
+                                $date=date('Y-m-d');
+                                $fed=$this->Feeding_model->getAllDispensingByFishDate($user['id'],$date);                                
+                                $totalfeed=0;
+                                foreach($fed as $r){
+                                    $totalfeed += $r['quantity'];
+                                }
+                                if(($totalfeed/$user['feed_usage']) == 2){                                    
+                                    $stat="disabled";
+                                    $st=2;
+                                }else if(($totalfeed/$user['feed_usage']) == 1){
+                                    $stat="";
+                                    $st=1;
+                                }else{
+                                    $stat="";
+                                    $st=0;
+                                }             
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
-                                    echo "<td>$user[fullname]</td>";
-                                    echo "<td>$user[username]</td>";
-                                    echo "<td align='center'>$user[password]</td>";
-                                    echo "<td>$user[contactno]</td>";
+                                    echo "<td>$user[description]</td>";
+                                    echo "<td>$user[category]</td>";
+                                    echo "<td align='center'>$user[feed_usage]</td>";                                                                        
+                                    echo "<td>$st</td>";                 
                                     ?>
+                                    <?=form_open(base_url()."submit_feeding",array("onsubmit" => "return confirm('Do you wish to submit feeding?');return false;"));?>
+                                    <?php
+                                    echo "<td>
+                                    <select name='stock_id' class='form-control' required>
+                                        <option value=''>Select Feeds</option>
+                                        ";
+                                    $feeds=$this->Feeding_model->getAllFeeds();
+                                    foreach($feeds as $i){
+                                        echo "<option value='$i[code]'>$i[description]</option>";
+                                    }
+                                        echo "
+                                    </select>
+                                    </td>";                   
+                                    ?>
+                                    
+                                    <input type="hidden" name="fish_id" value="<?=$user['id'];?>">
+                                    <td><input type="text" name="quantity" class="form-control" value="<?=$user['feed_usage'];?>" required></td>
                                     <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editUser" data-toggle="modal" data-target="#ManageUser" data-id="<?=$user['id'];?>_<?=$user['username'];?>_<?=$user['password'];?>_<?=$user['fullname'];?>_<?=$user['contactno'];?>"><i class="fas fa-edit"></i></a>
-                                        <a href="<?=base_url();?>delete_user/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this user?'); return false;"><i class="fas fa-trash"></i></a>
+                                        <button type="submit" class="btn btn-success" title="Execute Feeding" <?=$stat;?>><i class="fas fa-fill"></i></a>                                        
                                     </td>
+                                    <?=form_close();?>
                                     <?php
                                 echo "</tr>";
                             }
@@ -67,7 +102,7 @@
                 </div>
               </div>
             </div>                      
-          </div>
+          </div>          
         </section>
         <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>

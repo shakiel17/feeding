@@ -21,6 +21,7 @@
       document.getElementById('user_name').value = '';
       document.getElementById('user_password').value = '';
       document.getElementById('user_fullname').value = '';      
+      document.getElementById('user_contactno').value = '';
     });
     $('.editUser').click(function(){
       var data = $(this).data('id');
@@ -29,6 +30,7 @@
       document.getElementById('user_name').value = id[1];
       document.getElementById('user_password').value = id[2];
       document.getElementById('user_fullname').value = id[3];      
+      document.getElementById('user_contactno').value = id[4];
     });
     $('.addFish').click(function(){
       document.getElementById('fish_id').value = '';

@@ -1,9 +1,9 @@
-    <div class="main-content">
+<div class="main-content">
         <section class="section">
           <div class="section-body">            
-            <div class="row">
-              <div class="col-6">
-                <?php
+            <div class="row">            
+              <div class="col-7">                              
+              <?php
                 if($this->session->success){
                     ?>
                     <div class="alert alert-success"><?=$this->session->success;?></div>
@@ -16,13 +16,13 @@
                     <div class="alert alert-danger"><?=$this->session->failed;?></div>
                     <?php
                 }
-                ?>              
+                ?>
                 <div class="card">
                   <div class="card-header">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><h4>List of Caretakers</h4></td>
-                            <td align="right"><a href="#" class="btn btn-primary addUser" data-toggle="modal" data-target="#ManageUser"><i class="fas fa-plus"></i> New User</a></td>
+                            <td><h4>PO # (<?=$pono;?>)</h4></td>
+                            <td align="right"><a href="<?=base_url();?>purchase_order" class="btn btn-primary"><i class="fas fa-times"></i> Close</a></td>
                         </tr>
                     </table>
                   </div>
@@ -33,33 +33,78 @@
                           <tr>
                             <th class="text-center">
                               #
-                            </th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Contact No.</th>
+                            </th>                            
+                            <th>Description</th>
+                            <th>Qty</td>                            
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             <?php
                             $x=1;
-                            foreach($users as $user){
+                            foreach($items as $user){                              
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
-                                    echo "<td>$user[fullname]</td>";
-                                    echo "<td>$user[username]</td>";
-                                    echo "<td align='center'>$user[password]</td>";
-                                    echo "<td>$user[contactno]</td>";
+                                    echo "<td>$user[description]</td>";
+                                    echo "<td>$user[quantity]</td>";                                    
                                     ?>
                                     <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editUser" data-toggle="modal" data-target="#ManageUser" data-id="<?=$user['id'];?>_<?=$user['username'];?>_<?=$user['password'];?>_<?=$user['fullname'];?>_<?=$user['contactno'];?>"><i class="fas fa-edit"></i></a>
-                                        <a href="<?=base_url();?>delete_user/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this user?'); return false;"><i class="fas fa-trash"></i></a>
+                                        <a href="<?=base_url();?>remove_po_item/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you wish to remove this item?');return false;"><i class="fas fa-trash"></i> Remove</a>                                        
                                     </td>
+                                    <?php
+                                echo "</tr>";
+                                $x++;
+                            }
+                            ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-5">                              
+                <div class="card">
+                  <div class="card-header">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td><h4>Item List</h4></td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                  </div>
+                  <?=form_open(base_url()."add_to_cart");?>
+                  <input type="hidden" name="pono" value="<?=$pono;?>">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" id="table-1">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              
+                            </th>                            
+                            <th>Description</th>
+                            <th width="10%">SOH</td>                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $x=1;
+                            foreach($feeds as $user){                              
+                                $qty=$this->Feeding_model->getQty($user['code']);
+                                echo "<tr>";
+                                    echo "<td><input type='checkbox' name='code[]' value='$user[code]'></td>";
+                                    echo "<td>$user[description]</td>";
+                                    echo "<td>$qty[quantity]</td>";                                    
+                                    ?>                                    
                                     <?php
                                 echo "</tr>";
                             }
                             ?>
+                            <tr>
+                                <td colspan="2"><label>Quantity (in grams): <input type="text" class="form-control" name="quantity" style="width:100px;"></label></td>
+                                <td><input type="submit" class="btn btn-success" name="submit" value="Add to List"></td>
+                        </tr>
                         </tbody>
                       </table>
                     </div>

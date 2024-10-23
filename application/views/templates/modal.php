@@ -46,6 +46,10 @@
                     <label>Full Name</label>
                     <input type="text" class="form-control" name="fullname" required id="user_fullname">
                   </div>
+                  <div class="form-group">
+                    <label>Contact No.</label>
+                    <input type="text" class="form-control" name="contactno" required id="user_contactno">
+                  </div>
               </div>
               <div class="modal-footer bg-whitesmoke br">
                 <button type="submit" class="btn btn-primary">Submit</button>                
@@ -125,3 +129,4 @@
             <?=form_close();?>
           </div>
         </div>
+        
