@@ -34,14 +34,14 @@ DROP TABLE IF EXISTS `dispensing`;
 
 CREATE TABLE `dispensing` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
-  `fish_id` int(11) DEFAULT NULL,
-  `stock_id` int(11) DEFAULT NULL,
+  `fish_id` varchar(11) DEFAULT NULL,
+  `stock_id` varchar(11) DEFAULT NULL,
   `pono` varchar(100) DEFAULT NULL,
   `quantity` double DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `fish` */
 
@@ -55,7 +55,7 @@ CREATE TABLE `fish` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `notification` */
 
@@ -63,9 +63,11 @@ DROP TABLE IF EXISTS `notification`;
 
 CREATE TABLE `notification` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
-  `stock_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
+  `applicable_date` date DEFAULT NULL,
+  `applicable_time` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -77,14 +79,14 @@ CREATE TABLE `purchaseorder` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
   `pono` varchar(100) DEFAULT NULL,
   `invno` varchar(100) DEFAULT NULL,
-  `stock_id` int(11) DEFAULT NULL,
+  `stock_id` varchar(100) DEFAULT NULL,
   `quantity` double DEFAULT NULL,
   `expiration` date DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `stocks` */
 
@@ -98,7 +100,7 @@ CREATE TABLE `stocks` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `stocktable` */
 
@@ -115,7 +117,7 @@ CREATE TABLE `stocktable` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `user` */
 
@@ -126,6 +128,7 @@ CREATE TABLE `user` (
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `fullname` varchar(100) DEFAULT NULL,
+  `contactno` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
