@@ -301,5 +301,70 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url()."manage_feeding");
         }
+
+        public function manage_report(){
+            $page = "manage_report";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }            
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function print_report(){
+            $page = "print_report";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }            
+            $data['startdate'] = $this->input->post('startdate');
+            $data['enddate'] = $this->input->post('enddate');
+            $data['type'] = $this->input->post('type');
+            $this->load->view('pages/'.$page,$data);            
+        }
+
+        public function manage_expired(){
+            $page = "manage_expired";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }            
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+        public function remove_expired(){
+            $refno=$this->input->post('refno');
+            $code=$this->input->post('code');
+            $expiration=$this->input->post('expiration');
+            $quantity=$this->input->post('soh');
+            $x=0;
+            foreach($refno as $rrno){
+                $feeding=$this->Feeding_model->remove_expired($rrno,$code[$x],$expiration[$x],$quantity[$x]);
+                $x++;
+            }            
+            if($feeding){
+                $this->session->set_flashdata('success','Expired feeds successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove expired feeds!');
+            }
+            redirect(base_url()."manage_expired");
+        }
 }
 ?>

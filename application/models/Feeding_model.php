@@ -214,5 +214,16 @@
             }
 
         }
+        public function remove_expired($refno,$code,$expiration,$quantity){
+            $date=date('Y-m-d');
+            $time=date('H:i:s');
+            $result=$this->db->query("INSERT INTO stocktable(refno,invno,stock_id,quantity,expiration,trantype,datearray,timearray) VALUES('$refno','','$code','-$quantity','$expiration','out','$date','$time')");
+            $result=$this->db->query("INSERT INTO expired(refno,stock_id,quantity,expiration,datearray,timearray) VALUES('$refno','$code','$quantity','$expiration','$date','$time')");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>
