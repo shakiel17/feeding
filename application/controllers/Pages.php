@@ -1,4 +1,5 @@
 <?php
+use Twilio\Rest\Client;
 ini_set('max_execution_time', 0);
 ini_set('memory_limit','2048M');
 date_default_timezone_set('Asia/Manila');
@@ -365,6 +366,25 @@ date_default_timezone_set('Asia/Manila');
                 $this->session->set_flashdata('failed','Unable to remove expired feeds!');
             }
             redirect(base_url()."manage_expired");
+        }
+
+        public function send_sms(){
+            $message="This is a sample text message!";
+            $this->load->config('twilio');
+            $sid = $this->config->item('sid');
+            $token = $this->config->item('token');
+            $twilio_client = new Client($sid,$token);
+            $phone= $this->config->item('phone');
+            try{
+                $twilio_client->message->create('+639107524284',[
+                    'from' => $phone,
+                    'body' => $message
+                ]);
+                echo 'SMS has been sent!';
+            }catch(Exception $ex){
+                echo 'SMS failed due to '.$ex;
+            }
+            
         }
 }
 ?>
