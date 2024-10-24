@@ -11,8 +11,10 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.3.7",		
-		"twilio/sdk": "^8.3.4"
+		"php": ">=5.3.7",
+		"mpdf/mpdf": "^8.0",
+		"vonage/client": "*",
+		"twilio/sdk": "^6.27"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
