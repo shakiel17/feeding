@@ -50,10 +50,14 @@ date_default_timezone_set('Asia/Manila');
             }else{
                 redirect(base_url());
             }
+            $data['users'] = $this->Feeding_model->getAllUsers();
+            $data['feeds'] = $this->Feeding_model->getAllFeeds();
+            $data['fish'] = $this->Feeding_model->getAllFish();
+            $data['items'] = $this->Feeding_model->getAllPO("received");
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('pages/'.$page);
+            $this->load->view('pages/'.$page,$data);
             $this->load->view('templates/modal');
             $this->load->view('templates/footer');
         }

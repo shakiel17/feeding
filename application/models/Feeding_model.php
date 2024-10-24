@@ -172,7 +172,7 @@
             $res=$query->row_array();
             $qty=$res['quantity'];            
             $result=$this->db->query("INSERT INTO stocktable(refno,invno,stock_id,quantity,expiration,trantype,datearray,timearray) VALUES('$pono','$invno','$code','$qty','$expiration','in','$date','$time')");            
-            $result=$this->db->query("UPDATE purchaseorder SET `status`='received',invno='$invno',expiration='$expiration' WHERE stock_id='$code' AND pono='$pono' AND `status`='pending'");
+            $result=$this->db->query("UPDATE purchaseorder SET `status`='received',invno='$invno',expiration='$expiration',rrdate='$date',rrtime='$time' WHERE stock_id='$code' AND pono='$pono' AND `status`='pending'");
             if($result){
                 return true;
             }else{

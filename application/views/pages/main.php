@@ -9,8 +9,8 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Fish</h5>
-                          <h2 class="mb-3 font-18">258</h2>
-                          <p class="mb-0"><span class="col-green">10%</span> Increase</p>
+                          <h2 class="mb-3 font-18"><?=count($fish);?></h2>
+                          <!-- <p class="mb-0"><span class="col-green">10%</span> Increase</p> -->
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -31,8 +31,8 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Feeds</h5>
-                          <h2 class="mb-3 font-18">1,287</h2>
-                          <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
+                          <h2 class="mb-3 font-18"><?=count($feeds);?></h2>
+                          <!-- <p class="mb-0"><span class="col-orange">09%</span> Decrease</p> -->
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -53,9 +53,9 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Users</h5>
-                          <h2 class="mb-3 font-18">128</h2>
-                          <p class="mb-0"><span class="col-green">18%</span>
-                            Increase</p>
+                          <h2 class="mb-3 font-18"><?=count($users);?></h2>
+                          <!-- <p class="mb-0"><span class="col-green">18%</span>
+                            Increase</p> -->
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -75,9 +75,9 @@
                     <div class="row ">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
-                          <h5 class="font-15">Revenue</h5>
-                          <h2 class="mb-3 font-18">$48,697</h2>
-                          <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+                          <h5 class="font-15">Purchases</h5>
+                          <h2 class="mb-3 font-18"><?=count($items);?></h2>
+                          <!-- <p class="mb-0"><span class="col-green">42%</span> Increase</p> -->
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -85,6 +85,56 @@
                           <img src="assets/img/banner/4.png" alt="">
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                    <div class="card-header">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td><h4>Purchase History</h4></td>                           
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" id="table-1">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th>PO #</th>
+                            <th>PO Date/Time</th>
+                            <th>No. of Items</th>
+                            <th>RR Date/Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $x=1;
+                            foreach($items as $item){
+                              echo "<tr>";
+                                echo "<td>$x.</td>";
+                                echo "<td>$item[pono]</td>";
+                                echo "<td>".date('m/d/Y',strtotime($item['datearray']))." ".date('h:i A',strtotime($item['timearray']))."</td>";
+                                echo "<td>$item[no_of_items]</td>";
+                                echo "<td>".date('m/d/Y',strtotime($item['rrdate']))." ".date('h:i A',strtotime($item['rrtime']))."</td>";
+                              echo "</tr>";
+                              $x++;
+                            }
+                            ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                     </div>
                   </div>
                 </div>
