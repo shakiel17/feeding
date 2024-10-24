@@ -12,6 +12,17 @@ date_default_timezone_set('Asia/Manila');
             if($this->session->user_login || $this->session->admin_login){
                 redirect(base_url()."main");
             }
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'easykill.aboy@gmail.com',
+                'smtp_pass' => 'ngfpdqyrfvoffhur',
+                'mailtype' => 'text',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE
+            );
+            $this->load->library('email',$config);
             $this->load->view('pages/'.$page);                        
         }
         public function authenticate(){
