@@ -43,6 +43,21 @@ CREATE TABLE `dispensing` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+/*Table structure for table `expired` */
+
+DROP TABLE IF EXISTS `expired`;
+
+CREATE TABLE `expired` (
+  `id` int(45) NOT NULL AUTO_INCREMENT,
+  `refno` varchar(100) DEFAULT NULL,
+  `stock_id` varchar(100) DEFAULT NULL,
+  `quantity` double DEFAULT NULL,
+  `expiration` date DEFAULT NULL,
+  `datearray` date DEFAULT NULL,
+  `timearray` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*Table structure for table `fish` */
 
 DROP TABLE IF EXISTS `fish`;
@@ -68,8 +83,9 @@ CREATE TABLE `notification` (
   `timearray` time DEFAULT NULL,
   `applicable_date` date DEFAULT NULL,
   `applicable_time` varchar(100) DEFAULT NULL,
+  `status` varchar(100) DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `purchaseorder` */
 
@@ -85,6 +101,8 @@ CREATE TABLE `purchaseorder` (
   `status` varchar(100) DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
+  `rrdate` date DEFAULT NULL,
+  `rrtime` time DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -117,7 +135,7 @@ CREATE TABLE `stocktable` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `user` */
 
