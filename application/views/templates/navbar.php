@@ -1,5 +1,5 @@
 <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+          <!-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
               class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
               <span class="badge headerBadge1">
                 6 </span> </a>
@@ -10,7 +10,7 @@
                   <a href="#">Mark All As Read</a>
                 </div>
               </div>
-              <div class="dropdown-list-content dropdown-list-message">
+              <div class="dropdown-list-content dropdown-list-message"> -->
                 <!-- <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
 											text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">John
@@ -59,13 +59,13 @@
                     <span class="time">2 Days Ago</span>
                   </span>
                 </a> -->
-              </div>
+              <!-- </div>
               <div class="dropdown-footer text-center">
                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
               </div>
             </div>
-          </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+          </li> -->
+          <!-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
               class="nav-link notification-toggle nav-link-lg"><i data-feather="bell" class="bell"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
@@ -75,7 +75,7 @@
                   <a href="#">Mark All As Read</a>
                 </div>
               </div>
-              <div class="dropdown-list-content dropdown-list-icons">
+              <div class="dropdown-list-content dropdown-list-icons"> -->
                 <!-- <a href="#" class="dropdown-item dropdown-item-unread"> <span
                     class="dropdown-item-icon bg-primary text-white"> <i class="fas
 												fa-code"></i>
@@ -112,12 +112,12 @@
                     template! <span class="time">Yesterday</span>
                   </span>
                 </a> -->
-              </div>
+              <!-- </div>
               <div class="dropdown-footer text-center">
                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
               </div>
             </div>
-          </li>
+          </li> -->
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?=base_url();?>design/assets/img/user.png"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>

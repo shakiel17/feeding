@@ -54,7 +54,7 @@ date_default_timezone_set('Asia/Manila');
             $data['users'] = $this->Feeding_model->getAllUsers();
             $data['feeds'] = $this->Feeding_model->getAllFeeds();
             $data['fish'] = $this->Feeding_model->getAllFish();
-            $data['items'] = $this->Feeding_model->getAllPO("received");
+            $data['items'] = $this->Feeding_model->getAllPO("received");            
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -366,6 +366,23 @@ date_default_timezone_set('Asia/Manila');
                 $this->session->set_flashdata('failed','Unable to remove expired feeds!');
             }
             redirect(base_url()."manage_expired");
+        }
+        public function send_sms(){
+            $message="This is a sample text message!";            
+            $sid = "AC6e8357d805dd1ba26306e8ca0599c5ad";
+            $token = "2a630606b54f62fc6cc5753339a0f307";
+            $twilio_client = new Client($sid,$token);
+            $phone= "+15303792212";
+            try{
+                $twilio_client->messages->create('+639107524284',array(
+                    'from' => $phone,
+                    'body' => $message
+                ));
+                echo 'SMS has been sent!';
+            }catch(Exception $ex){
+                echo 'SMS failed due to '.$ex;
+            }
+            
         }
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-use Twilio\Rest\Client;
     date_default_timezone_set('Asia/Manila');
     class Feeding_model extends CI_model{
         public function __construct(){
@@ -225,23 +224,6 @@ use Twilio\Rest\Client;
             }else{
                 return false;
             }
-        }
-        public function send_sms(){
-            $message="This is a sample text message!";            
-            $sid = "AC6e8357d805dd1ba26306e8ca0599c5ad";
-            $token = "2a630606b54f62fc6cc5753339a0f307";
-            $twilio_client = new Client($sid,$token);
-            $phone= "+15303792212";
-            try{
-                $twilio_client->messages->create('+639107524284',array(
-                    'from' => $phone,
-                    'body' => $message
-                ));
-                echo 'SMS has been sent!';
-            }catch(Exception $ex){
-                echo 'SMS failed due to '.$ex;
-            }
-            
-        }
+        }        
     }
 ?>

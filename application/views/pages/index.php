@@ -1,3 +1,57 @@
+<?php
+use Twilio\Rest\Client;
+//$message="This is a sample text message!";            
+$sid = "AC6e8357d805dd1ba26306e8ca0599c5ad";
+$token = "2a630606b54f62fc6cc5753339a0f307";
+$twilio_client = new Client($sid,$token);
+$phone= "+15303792212";
+$appdate=date('Y-m-d');
+$time=date('H:i:s');
+$apptime1="06:00:00";
+$apptime2="16:00:00";
+$query=$this->Feeding_model->db->query("SELECT * FROM fish GROUP BY category");
+$result=$query->result_array();
+$message="It`s feeding time! ";
+foreach($result as $r){
+  $message .= $r['category']." ".$r['feed_usage']."g".", "; 
+}
+$check=$this->Feeding_model->db->query("SELECT * FROM `notification` WHERE applicable_date='$appdate'");
+$res=$check->result_array();
+$has=count($res);
+
+$query1=$this->Feeding_model->db->query("SELECT * FROM user LIMIT 1");
+$res1=$query1->row_array();
+$contactno=$res1['contactno'];
+if($has==2){
+
+}else if($has==1){
+  if(date('H:i:s') >=  $apptime2 && date('H:i:s') <= "17:00:00"){
+    $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime2')");
+    // try{
+    //   $twilio_client->messages->create($contactno,array(
+    //       'from' => $phone,
+    //       'body' => $message
+    //   ));
+    //   //echo 'SMS has been sent!';
+    // }catch(Exception $ex){
+    //     //echo 'SMS failed due to '.$ex;
+    // }
+  }
+}else{
+  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "14:00:00"){
+    $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime1')");
+  //   try{
+  //     $twilio_client->messages->create($contactno,array(
+  //         'from' => $phone,
+  //         'body' => $message
+  //     ));
+  //     //echo 'SMS has been sent!';
+  // }catch(Exception $ex){
+  //     //echo 'SMS failed due to '.$ex;
+  // }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
