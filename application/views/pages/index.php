@@ -1,21 +1,21 @@
 <?php
 use Twilio\Rest\Client;
 //$message="This is a sample text message!";            
-$sid = "AC6e8357d805dd1ba26306e8ca0599c5ad";
-$token = "044b1590a11e5ec0b752dd795ab41f2c";
-$twilio_client = new Client($sid,$token);
-$phone= "+15303792212";
+// $sid = "AC6e8357d805dd1ba26306e8ca0599c5ad";
+// $token = "044b1590a11e5ec0b752dd795ab41f2c";
+// $twilio_client = new Client($sid,$token);
+// $phone= "+15303792212";
 
-// $config = array(
-//   'protocol' => 'smtp',
-//   'smtp_host' => 'ssl://smtp.googlemail.com',
-//   'smtp_port' => 465,
-//   'smtp_user' => 'easykill.aboy@gmail.com',
-//   'smtp_pass' => 'ngfpdqyrfvoffhur',
-//   'mailtype' => 'text',
-//   'charset' => 'iso-8859-1',
-//   'wordwrap' => TRUE
-// );
+$config = array(
+  'protocol' => 'smtp',
+  'smtp_host' => 'ssl://smtp.googlemail.com',
+  'smtp_port' => 465,
+  'smtp_user' => 'easykill.aboy@gmail.com',
+  'smtp_pass' => 'ngfpdqyrfvoffhur',
+  'mailtype' => 'text',
+  'charset' => 'iso-8859-1',
+  'wordwrap' => TRUE
+);
 
 $appdate=date('Y-m-d');
 $time=date('H:i:s');
@@ -33,42 +33,43 @@ $has=count($res);
 
 $query1=$this->Feeding_model->db->query("SELECT * FROM user LIMIT 1");
 $res1=$query1->row_array();
-$contactno=$res1['contactno'];
-//$contactno=$res1['contactno']."@pmms.globe.com.ph";
-// $subject="Feeding Time";
-// $this->load->library('email',$config);
-// $this->email->set_newline("\r\n");
-// $this->email->from('Online Fish Feeding');
-// $this->email->to($contactno);
-// //$this->email->subject($subject);
-// $this->email->message($message);
+//$contactno=$res1['contactno'];
+$contactno=$res1['contactno']."@smart.mms.ph";
+$subject="Feeding Time";
+$this->load->library('email',$config);
+$this->email->set_newline("\r\n");
+$this->email->from('Online Fish Feeding');
+$this->email->to($contactno);
+//$this->email->subject($subject);
+$this->email->message($message);
 if($has==2){
 
+}else if($has==1){
+  if(date('H:i:s') >=  $apptime2 && date('H:i:s') <= "17:00:00"){
+    if($this->email->send()){
+      // try{
+      //       $twilio_client->messages->create("$contactno",array(
+      //           'from' => $phone,
+      //           'body' => $message
+      //       ));
+      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime2')");
+    // }catch(Exception $ex){
+    //       echo 'SMS failed due to '.$ex;
+    }
 }else{
-  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "15:55:00"){
-    //if($this->email->send()){
-      try{
-        $twilio_client->messages->create("$contactno",array(
-            'from' => $phone,
-            'body' => $message
-        ));
+  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "07:00:00"){
+    if($this->email->send()){
+      // try{
+      //   $twilio_client->messages->create("$contactno",array(
+      //       'from' => $phone,
+      //       'body' => $message
+      //   ));
       $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime1')");
-    }catch(Exception $ex){
-      echo 'SMS failed due to '.$ex;
+    // }catch(Exception $ex){
+    //   echo 'SMS failed due to '.$ex;
   }    
   }
-
-    if(date('H:i:s') >=  $apptime2 && date('H:i:s') <= "17:00:00"){
-      //if($this->email->send()){
-        try{
-              $twilio_client->messages->create("$contactno",array(
-                  'from' => $phone,
-                  'body' => $message
-              ));
-        $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime2')");
-      }catch(Exception $ex){
-            echo 'SMS failed due to '.$ex;
-      }
+    
     
   //   try{
   //     $twilio_client->messages->create($contactno,array(
@@ -90,6 +91,7 @@ if($has==2){
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta http-equiv="refresh" content="120">
   <title>Online Inventory AND Fish Feeding Guide</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?=base_url();?>design/assets/css/app.min.css">
