@@ -19,7 +19,7 @@
 	},
 	"scripts": {
 		"test:coverage": [
-			"@putenv XDEBUG_MODE=coverage",
+			"@putenv XDEBUG_MODE=coverage", 
 			"phpunit --color=always --coverage-text --configuration tests/travis/sqlite.phpunit.xml"
 		],
 		"post-install-cmd": [
@@ -33,4 +33,4 @@
 		"mikey179/vfsstream": "1.6.*",
 		"phpunit/phpunit": "4.* || 5.* || 9.*"
 	}
-}
+  }
