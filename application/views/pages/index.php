@@ -63,7 +63,7 @@ if($has==2){
     }
   }
 }else{
-  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "15:30:00"){
+  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "07:00:00"){
     if($this->email->send()){
       // try{
       //   $twilio_client->messages->create("$contactno",array(
