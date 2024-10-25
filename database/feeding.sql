@@ -86,7 +86,7 @@ CREATE TABLE `notification` (
   `applicable_time` varchar(100) DEFAULT NULL,
   `status` varchar(100) DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `purchaseorder` */
 
