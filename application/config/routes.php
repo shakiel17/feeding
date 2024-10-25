@@ -49,6 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['remove_notification/(:any)'] = 'pages/remove_notification/$1';
+$route['manage_notification'] = 'pages/manage_notification';
 $route['send_sms'] = 'pages/send_sms';
 $route['remove_expired'] = 'pages/remove_expired';
 $route['print_report'] = 'pages/print_report';

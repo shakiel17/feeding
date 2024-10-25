@@ -33,15 +33,20 @@ $has=count($res);
 
 $query1=$this->Feeding_model->db->query("SELECT * FROM user LIMIT 1");
 $res1=$query1->row_array();
-//$contactno=$res1['contactno'];
-$contactno=$res1['contactno']."@smart.mms.ph";
+$contactno=$res1['contactno'];
+$query2=$this->Feeding_model->db->query("SELECT * FROM `admin` LIMIT 1");
+$res2=$query2->row_array();
+$email2=$res2['email'];
+$emails=$contactno.",".$email2;
+//$contactno=$res1['contactno']."@smart.mms.ph";
 $subject="Feeding Time";
 $this->load->library('email',$config);
 $this->email->set_newline("\r\n");
 $this->email->from('Online Fish Feeding');
-$this->email->to($contactno);
+$this->email->to($emails);
 //$this->email->subject($subject);
 $this->email->message($message);
+
 if($has==2){
 
 }else if($has==1){
@@ -56,8 +61,9 @@ if($has==2){
     // }catch(Exception $ex){
     //       echo 'SMS failed due to '.$ex;
     }
+  }
 }else{
-  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "07:00:00"){
+  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "15:30:00"){
     if($this->email->send()){
       // try{
       //   $twilio_client->messages->create("$contactno",array(
@@ -79,8 +85,7 @@ if($has==2){
   //     //echo 'SMS has been sent!';
   // }catch(Exception $ex){
   //     //echo 'SMS failed due to '.$ex;
-  // }
-    }
+  // }    
 }
 ?>
 <!DOCTYPE html>

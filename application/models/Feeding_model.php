@@ -225,5 +225,18 @@
                 return false;
             }
         }        
+
+        public function getAllNotification(){
+            $result=$this->db->query("SELECT * FROM `notification` ORDER BY datearray DESC, timearray ASC");
+            return $result->result_array();
+        }
+        public function remove_notification($id){
+            $result=$this->db->query("DELETE FROM `notification` WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

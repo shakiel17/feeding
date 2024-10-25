@@ -50,6 +50,7 @@
               <i class="fas fa-cogs"></i><span>Settings</span></a>
               <ul class="dropdown-menu">
                   <li><a class="nav-link" href="<?=base_url();?>manage_user">User Management</a></li>                  
+                  <li><a class="nav-link" href="<?=base_url();?>manage_notification">Notification</a></li>                  
               </ul>
             </li>            
             <?php

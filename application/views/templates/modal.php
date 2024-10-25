@@ -47,7 +47,7 @@
                     <input type="text" class="form-control" name="fullname" required id="user_fullname">
                   </div>
                   <div class="form-group">
-                    <label>Contact No.</label>
+                    <label>Email</label>
                     <input type="text" class="form-control" name="contactno" required id="user_contactno">
                   </div>
               </div>

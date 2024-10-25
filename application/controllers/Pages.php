@@ -395,5 +395,33 @@ date_default_timezone_set('Asia/Manila');
             }
             
         }
+
+        public function manage_notification(){
+            $page = "notification";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }            
+            if($this->session->user_login || $this->session->admin_login){                
+            }else{
+                redirect(base_url());
+            }
+            $data['users'] = $this->Feeding_model->getAllNotification();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/modal');
+            $this->load->view('templates/footer');
+        }
+
+        public function remove_notification($id){
+            $feeding=$this->Feeding_model->remove_notification($id);            
+            if($feeding){
+                $this->session->set_flashdata('success','Notification history successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove notification history!');
+            }
+            redirect(base_url()."manage_notification");
+        }
 }
 ?>
