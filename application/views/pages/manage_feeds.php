@@ -45,7 +45,7 @@
                             $x=1;
                             foreach($items as $user){
                               $qty=$this->Feeding_model->getQty($user['code']);
-                              if($qty['quantity'] == null){
+                              if($qty){
                                 $quantity=0;
                               }else{
                                 $quantity=$qty['quantity'];
