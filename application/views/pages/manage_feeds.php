@@ -45,10 +45,15 @@
                             $x=1;
                             foreach($items as $user){
                               $qty=$this->Feeding_model->getQty($user['code']);
+                              if($qty['quantity'] == null){
+                                $quantity=0;
+                              }else{
+                                $quantity=$qty['quantity'];
+                              }
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
                                     echo "<td>$user[description]</td>";
-                                    echo "<td>$qty[quantity]</td>";
+                                    echo "<td>$quantity</td>";
                                     echo "<td align='center'>$user[stockalert]</td>";
                                     ?>
                                     <td align="center">

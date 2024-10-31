@@ -92,10 +92,15 @@
                             $x=1;
                             foreach($feeds as $user){                              
                                 $qty=$this->Feeding_model->getQty($user['code']);
+                                if($qty['quantity'] == null){
+                                  $quantity=0;
+                                }else{
+                                  $quantity=$qty['quantity'];
+                                }
                                 echo "<tr>";
                                     echo "<td><input type='checkbox' name='code[]' value='$user[code]'></td>";
                                     echo "<td>$user[description]</td>";
-                                    echo "<td>$qty[quantity]</td>";                                    
+                                    echo "<td>$quantity</td>";                                    
                                     ?>                                    
                                     <?php
                                 echo "</tr>";

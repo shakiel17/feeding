@@ -50,9 +50,11 @@
                                 $date=date('Y-m-d');
                                 $fed=$this->Feeding_model->getAllDispensingByFishDate($user['id'],$date);                                
                                 $totalfeed=0;
-                                foreach($fed as $r){
+                                if(count($fed) > 0){
+                                  foreach($fed as $r){
                                     $totalfeed += $r['quantity'];
-                                }
+                                  }
+                                }                                
                                 if(($totalfeed/$user['feed_usage']) == 2){                                    
                                     $stat="disabled";
                                     $st=2;

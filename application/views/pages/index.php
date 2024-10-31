@@ -28,17 +28,30 @@ foreach($result as $r){
   $message .= $r['category']." ".$r['feed_usage']."g".", "; 
 }
 $check=$this->Feeding_model->db->query("SELECT * FROM `notification` WHERE applicable_date='$appdate'");
-$res=$check->result_array();
-$has=count($res);
+if($check->num_rows()>0){
+  $res=$check->result_array();
+  $has=count($res);
+}else{
+  $has=0;
+}
 
 $query1=$this->Feeding_model->db->query("SELECT * FROM user LIMIT 1");
-$res1=$query1->row_array();
-$contactno=$res1['contactno'];
+if($query1->num_rows() > 0){
+  $res1=$query1->row_array();
+  $contactno=$res1['contactno'];
+}else{
+  $contactno="";
+}
 $query2=$this->Feeding_model->db->query("SELECT * FROM `admin` LIMIT 1");
-$res2=$query2->row_array();
-$email2=$res2['email'];
+if($query2->num_rows()>0){
+  $res2=$query2->row_array();
+  $email2=$res2['email'];
+}else{
+  $email2="";
+}
+
 $emails=$contactno.",".$email2;
-//$contactno=$res1['contactno']."@smart.mms.ph";
+
 $subject="Feeding Time";
 $this->load->library('email',$config);
 $this->email->set_newline("\r\n");
