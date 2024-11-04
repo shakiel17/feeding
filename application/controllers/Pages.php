@@ -1,5 +1,6 @@
 <?php
 use Twilio\Rest\Client;
+//ini_set('display_errors' ,0);
 ini_set('max_execution_time', 0);
 ini_set('memory_limit','2048M');
 date_default_timezone_set('Asia/Manila');
@@ -305,7 +306,14 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('templates/footer');
         }
         public function submit_feeding(){
-            $feeding=$this->Feeding_model->submit_feeding();
+            $fish=$this->input->post('fish_id');
+            $stock=$this->input->post('stock_id');
+            $quantity=$this->input->post('quantity');
+            $x=0;
+            foreach($fish as $item){
+                $feeding=$this->Feeding_model->submit_feeding($item,$stock[$x],$quantity[$x]);
+                $x++;
+            }            
             if($feeding){
                 $this->session->set_flashdata('success','Execute feeding successfully!');
             }else{

@@ -44,11 +44,11 @@
                             <?php
                             $x=1;
                             foreach($items as $user){
-                              $qty=$this->Feeding_model->getQty($user['code']);
+                              $qty=$this->Feeding_model->getQty($user['code']);                             
                               if($qty){
-                                $quantity=0;
-                              }else{
                                 $quantity=$qty['quantity'];
+                              }else{
+                                $quantity=0;
                               }
                                 echo "<tr>";
                                     echo "<td>$x.</td>";
@@ -57,7 +57,7 @@
                                     echo "<td align='center'>$user[stockalert]</td>";
                                     ?>
                                     <td align="center">
-                                        <a href="#" class="btn btn-warning btn-sm editFeeds" data-toggle="modal" data-target="#ManageFeeds" data-id="<?=$user['id'];?>_<?=$user['description'];?>_<?=$qty['quantity'];?>_<?=$user['stockalert'];?>"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-warning btn-sm editFeeds" data-toggle="modal" data-target="#ManageFeeds" data-id="<?=$user['id'];?>_<?=$user['description'];?>_<?=$quantity;?>_<?=$user['stockalert'];?>"><i class="fas fa-edit"></i></a>
                                         <a href="<?=base_url();?>delete_feeds/<?=$user['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do  you wish to delete  this feeds?'); return false;"><i class="fas fa-trash"></i></a>
                                     </td>
                                     <?php

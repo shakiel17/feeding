@@ -17,18 +17,19 @@
                     <?php
                 }
                 ?>              
+                <?=form_open(base_url()."submit_feeding",array("onsubmit" => "return confirm('Do you wish to submit feeding?');return false;"));?>
                 <div class="card">
                   <div class="card-header">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td><h4>Fish Feeding</h4></td>
-                            <td align="right"></td>
+                            <td align="right"><button type="submit" class="btn btn-success">Submit</button></td>
                         </tr>
                     </table>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table" id="table-1">
+                      <table class="table">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -40,9 +41,9 @@
                             <th>No. of feeding (today)</th>
                             <th>Feeds</th>
                             <th width="15%">Feeds (in grams)</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                           </tr>
-                        </thead>
+                        </thead>                        
                         <tbody>                        
                             <?php
                             $x=1;
@@ -71,11 +72,8 @@
                                     echo "<td>$user[category]</td>";
                                     echo "<td align='center'>$user[feed_usage]</td>";                                                                        
                                     echo "<td>$st</td>";                 
-                                    ?>
-                                    <?=form_open(base_url()."submit_feeding",array("onsubmit" => "return confirm('Do you wish to submit feeding?');return false;"));?>
-                                    <?php
                                     echo "<td>
-                                    <select name='stock_id' class='form-control' required>
+                                    <select name='stock_id[]' class='form-control' required>
                                         <option value=''>Select Feeds</option>
                                         ";
                                     $feeds=$this->Feeding_model->getAllFeeds();
@@ -87,22 +85,24 @@
                                     </td>";                   
                                     ?>
                                     
-                                    <input type="hidden" name="fish_id" value="<?=$user['id'];?>">
-                                    <td><input type="text" name="quantity" class="form-control" value="<?=$user['feed_usage'];?>" required></td>
-                                    <td align="center">
+                                    <input type="hidden" name="fish_id[]" value="<?=$user['id'];?>">
+                                    <td><input type="text" name="quantity[]" class="form-control" value="<?=$user['feed_usage'];?>" required></td>
+                                    <!-- <td align="center">
                                         <button type="submit" class="btn btn-success" title="Execute Feeding" <?=$stat;?>><i class="fas fa-fill"></i></a>                                        
-                                    </td>
-                                    <?=form_close();?>
+                                    </td> -->
+                                    
                                     <?php
                                 echo "</tr>";
                             }
                             ?>
                         </tbody>
                       </table>
+                      
                     </div>
                   </div>
                 </div>
               </div>
+              <?=form_close();?>
             </div>                      
           </div>          
         </section>

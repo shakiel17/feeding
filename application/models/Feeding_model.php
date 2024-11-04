@@ -129,8 +129,8 @@
         }
         public function getQty($code){
             $result=$this->db->query("SELECT SUM(quantity) as quantity FROM stocktable WHERE stock_id='$code' AND refno <> '' GROUP BY stock_id");
-            if($result->num_rows()>0){
-                return $result->row_array();
+            if($result->num_rows()>0){                               
+                return $result->row_array();                
             }else{
                 return false;
             }
@@ -188,10 +188,7 @@
             return $result->result_array();
         }
 
-        public function submit_feeding(){
-            $fish=$this->input->post('fish_id');
-            $stock=$this->input->post('stock_id');
-            $quantity=$this->input->post('quantity');
+        public function submit_feeding($fish,$stock,$quantity){            
             $date=date('Y-m-d');
             $time=date('H:i:s');
             $remqty=$quantity;            
