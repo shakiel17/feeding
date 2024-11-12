@@ -140,6 +140,63 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                    <div class="card-header">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td><h4>Low Level Items</h4></td>                           
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" id="table-1">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>SOH</th>
+                            <th>Stock Alert</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $x=1;
+                            foreach($alert as $item){
+                              $qty=$this->Feeding_model->getQty($item['code']);
+                              $soh=0;
+                              if($qty){
+                                $soh=$qty['quantity'];
+                              }
+                              if($soh <= $item['stockalert']){
+                              echo "<tr>";
+                                echo "<td>$x.</td>";
+                                echo "<td>$item[code]</td>";
+                                echo "<td>$item[description]</td>";
+                                echo "<td></td>";
+                                echo "<td>$item[stockalert]</td>";
+                              echo "</tr>";                              
+                              $x++;
+                              }
+                            }
+                            ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>          
         </section>
         <div class="settingSidebar">
