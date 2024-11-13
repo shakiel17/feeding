@@ -23,8 +23,9 @@ date_default_timezone_set('Asia/Manila');
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
             );
+            $data['notif'] = $this->Feeding_model->getNotifyTime();
             $this->load->library('email',$config);
-            $this->load->view('pages/'.$page);                        
+            $this->load->view('pages/'.$page,$data);
         }
         public function authenticate(){
             $type=$this->input->post('type');
@@ -415,6 +416,7 @@ date_default_timezone_set('Asia/Manila');
                 redirect(base_url());
             }
             $data['users'] = $this->Feeding_model->getAllNotification();
+            $data['notif'] = $this->Feeding_model->getNotifyTime();
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -431,6 +433,15 @@ date_default_timezone_set('Asia/Manila');
                 $this->session->set_flashdata('failed','Unable to remove notification history!');
             }
             redirect(base_url()."manage_notification");
-        }
+        }  
+        public function save_notify_time(){
+            $feeding=$this->Feeding_model->save_notify_time();            
+            if($feeding){
+                $this->session->set_flashdata('success','Notification time successfully updated!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to update notification time!');
+            }
+            redirect(base_url()."manage_notification");
+        }        
 }
 ?>

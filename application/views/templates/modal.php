@@ -129,4 +129,43 @@
             <?=form_close();?>
           </div>
         </div>
+
+        <div class="modal fade" id="ManageNotifyTime" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <?=form_open(base_url()."save_notify_time");?>
+            <input type="hidden" name="id" value="<?=$notif['id'];?>">            
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Manage Notification Time</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label>Time From (AM)</label>
+                    <input type="time" class="form-control" name="amtime1" required value="<?=date('H:i',strtotime($notif['amtime1']));?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Time To (AM)</label>
+                    <input type="time" class="form-control" name="amtime2" required value="<?=date('H:i',strtotime($notif['amtime2']));?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Time From (PM)</label>
+                    <input type="time" class="form-control" name="pmtime1" required value="<?=date('H:i',strtotime($notif['pmtime1']));?>">
+                  </div>                  
+                  <div class="form-group">
+                    <label>Time To (PM)</label>
+                    <input type="time" class="form-control" name="pmtime2" required value="<?=date('H:i',strtotime($notif['pmtime2']));?>">
+                  </div>                  
+              </div>
+              <div class="modal-footer bg-whitesmoke br">
+                <button type="submit" class="btn btn-primary">Submit</button>                
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+            <?=form_close();?>
+          </div>
+        </div>
         

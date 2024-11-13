@@ -239,5 +239,22 @@
                 return false;
             }
         }
+        public function getNotifyTime(){
+            $result=$this->db->query("SELECT * FROM notify_time");
+            return $result->row_array();
+        }
+        public function save_notify_time(){
+            $id=$this->input->post('id');
+            $amtime1=$this->input->post('amtime1');
+            $pmtime1=$this->input->post('pmtime1');
+            $amtime2=$this->input->post('amtime2');
+            $pmtime2=$this->input->post('pmtime2');
+            $result=$this->db->query("UPDATE notify_time SET amtime1='$amtime1',pmtime1='$pmtime1',amtime2='$amtime2',pmtime2='$pmtime2' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

@@ -22,7 +22,7 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td><h4>Notification History</h4></td>
-                            <td align="right"><a href="#" class="btn btn-primary addUser" data-toggle="modal" data-target="#ManageUser"><i class="fas fa-plus"></i> New User</a></td>
+                            <td align="right"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#ManageNotifyTime"><i class="fas fa-edit"></i> Edit Notification Time</a></td>
                         </tr>
                     </table>
                   </div>

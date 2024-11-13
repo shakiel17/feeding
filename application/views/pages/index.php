@@ -19,8 +19,12 @@ $config = array(
 
 $appdate=date('Y-m-d');
 $time=date('H:i:s');
-$apptime1="06:00:00";
-$apptime2="16:00:00";
+// $apptime1="06:00:00";
+// $apptime2="16:00:00";
+$amtime1=$notif['amtime1'];
+$amtime2=$notif['amtime2'];
+$pmtime1=$notif['pmtime1'];
+$pmtime2=$notif['pmtime2'];
 $query=$this->Feeding_model->db->query("SELECT * FROM fish GROUP BY category");
 $result=$query->result_array();
 $message="It`s feeding time! ";
@@ -63,32 +67,56 @@ $this->email->message($message);
 if($has==2){
 
 }else if($has==1){
-  if(date('H:i:s') >=  $apptime2 && date('H:i:s') <= "17:00:00"){
+  if(date('H:i:s') >=  $pmtime1 && date('H:i:s') <= $pmtime2){
     if($this->email->send()){
       // try{
       //       $twilio_client->messages->create("$contactno",array(
       //           'from' => $phone,
       //           'body' => $message
       //       ));
-      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime2')");
+      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$pmtime1')");
     // }catch(Exception $ex){
     //       echo 'SMS failed due to '.$ex;
+    
     }
   }
-}else{
-  if(date('H:i:s') >=  $apptime1 && date('H:i:s') <= "07:00:00"){
+  if(date('H:i:s') >=  $amtime1 && date('H:i:s') <= $amtime2){
     if($this->email->send()){
       // try{
       //   $twilio_client->messages->create("$contactno",array(
       //       'from' => $phone,
       //       'body' => $message
       //   ));
-      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$apptime1')");
+      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$amtime1')");
     // }catch(Exception $ex){
-    //   echo 'SMS failed due to '.$ex;
+    //   echo 'SMS failed due to '.$ex;    
   }    
   }
-    
+}else{
+  if(date('H:i:s') >=  $pmtime1 && date('H:i:s') <= $pmtime2){
+    if($this->email->send()){
+      // try{
+      //       $twilio_client->messages->create("$contactno",array(
+      //           'from' => $phone,
+      //           'body' => $message
+      //       ));
+      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$pmtime1')");
+    // }catch(Exception $ex){
+    //       echo 'SMS failed due to '.$ex;    
+    }
+  }
+  if(date('H:i:s') >=  $amtime1 && date('H:i:s') <= $amtime2){
+    if($this->email->send()){
+      // try{
+      //   $twilio_client->messages->create("$contactno",array(
+      //       'from' => $phone,
+      //       'body' => $message
+      //   ));
+      $this->Feeding_model->db->query("INSERT INTO `notification`(`message`,datearray,timearray,applicable_date,applicable_time) VALUES('$message','$appdate','$time','$appdate','$amtime1')");
+    // }catch(Exception $ex){
+    //   echo 'SMS failed due to '.$ex;    
+  }    
+  }
     
   //   try{
   //     $twilio_client->messages->create($contactno,array(
