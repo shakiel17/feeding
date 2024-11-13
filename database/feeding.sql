@@ -86,7 +86,20 @@ CREATE TABLE `notification` (
   `applicable_time` varchar(100) DEFAULT NULL,
   `status` varchar(100) DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+/*Table structure for table `notify_time` */
+
+DROP TABLE IF EXISTS `notify_time`;
+
+CREATE TABLE `notify_time` (
+  `id` int(45) NOT NULL AUTO_INCREMENT,
+  `amtime1` time DEFAULT NULL,
+  `amtime2` time DEFAULT NULL,
+  `pmtime1` time DEFAULT NULL,
+  `pmtime2` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `purchaseorder` */
 
@@ -149,7 +162,7 @@ CREATE TABLE `user` (
   `fullname` varchar(100) DEFAULT NULL,
   `contactno` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
